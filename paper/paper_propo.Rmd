@@ -3,14 +3,14 @@ title: "Análisis Filogenético"
 author: "Carlos Pérez, Abraham Nieto @ ITAM"
 date: "Abril, 2017"
 output:
-  html_document:
-    toc: no
-    toc_depth: '3'
   pdf_document:
     includes:
       in_header: styles/mypackages.sty
     toc: no
     toc_depth: 3
+  html_document:
+    toc: no
+    toc_depth: '3'
   word_document:
     toc: no
     toc_depth: '3'
@@ -41,11 +41,19 @@ Las conclusiones esperadas son las razones por las que un algoritmo agrupa a la 
 \begin{itemize}
 \item Data Gathering: Obtención de archivos .fasta con información de las bases y mutaciones de distintas levaduras incluyendo Saccharomyces cerevisiae.
 \item Hacer el alineamiento múltiple de las secuencias utilizando una función en python o utilizando el software Muscle(el cuál es parte del pipeline *SNPhylo*) e identificaremos gráficamente las posiciones perfectamente conservadas a lo largo de todas las secuencias.
-![](/home/abraham/phylogenetics/paper/align.png) 
+\begin{center}
+\includegraphics[width=0.8\textwidth]{align.png}
+\end{center}
 \item A partir del archivo alineado generar la matriz de distancias entre secuencias usando distancia de Hamming.
 \item Sobre la matriz de distancias aplicar los algoritmos (NJ,UPGMA, etc…)
 \item utilizamos ETEtoolkit para visualizar el árbol filogenético 
-![](/home/abraham/phylogenetics/paper/arbolp.png) 
+
+
+
+\begin{center}
+\includegraphics[width=0.8\textwidth]{arbolp.png}
+\end{center}
+
 Finalmente, haremos elejercicio de la construcción del árbol usando el los pasos del pipeline *SNPhylo* y con esto ya tendremos los distintos árboles a interpretar y comparar.
 
 Con los árboles creados la idea es explicar cuales son las razones,basados en los distintos algoritmos de construcción, por las que existen diferencias entre los árboles.
