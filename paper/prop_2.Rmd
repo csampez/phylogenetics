@@ -1,33 +1,28 @@
 ---
-title: "Análisis Filogenético"
+title: "Bioinformática"
+subtitle: "Análisis Filogenético"
 author: "Carlos Pérez, Abraham Nieto @ ITAM"
 date: "Abril, 2017"
 output:
-  html_document:
-    toc: no
-    toc_depth: '3'
   pdf_document:
     includes:
       in_header: styles/mypackages.sty
     toc: no
     toc_depth: 3
-  word_document:
-    toc: no
-    toc_depth: '3'
 ---
 
 
-
+\newpage
 
 # Fundamentos del Análisis  
 
-In biology, phylogenetics is the study of the evolutionary history and relationships among individuals or groups of organisms (e.g. species, or populations). These relationships are discovered through phylogenetic inference methods that evaluate observed heritable traits, such as DNA sequences or morphology under a model of evolution of these traits. The result of these analyses is a phylogeny (also known as a phylogenetic tree) – a diagrammatic hypothesis about the history of the evolutionary relationships of a group of organisms. Phylogenetic analyses have become central to understanding biodiversity, evolution, ecology, and genomes. \footnote{https://en.wikipedia.org/wiki/Phylogenetics}
+En Biología, el análisis filogenético es el estudio de la historia evolutiva y las relaciones entre individuos o grupos de organismos. Estas relaciones son descubiertas mediante métodos de inferencia filogenétca que evalúan las características hereditarias, tal como son las secuencias de ADN o la morfología desde la optica de un modelo de evolución. El resultado de estos análisis es una filogenia, que también es conocido como arbol filogenteico, el cual consiste en una realización de las hipótesis sobre la historia evolutiva de las relaciones entre grupos de organimsmos. Los análisis filogenéticos se han vuelto base central para entender la biodiversidad, la evolución, la ecología y los genomas. \footnote{https://en.wikipedia.org/wiki/Phylogenetics}
 
 De forma puntual el análisis filogenético tiene como objetivos esenciales
 
   - Encontrar vínculos evolutivos entre organismos, al analizar los cambios en los diferentes organismos durante la evolución.
 
-  - Encontrar relaciones entre ancestros y sus descendientes, al analizar familias de secuencias
+ - Encontrar relaciones entre ancestros y sus descendientes, al analizar familias de secuencias
   
  - Estimar el tiempo de divergencia dentro de un grupo de organismos que comparten el mismo ancestro
 
@@ -39,21 +34,15 @@ La forma más común (y natural) de representar las relaciones evolutivas entre 
 \includegraphics[width=0.8\textwidth]{treetypes.png}
 \end{center}
 
-# Saccharomyces cerevisiae
-
-La levadura de cerveza (Saccharomyces cerevisiae Meyen ex E.C.Hansen, de Saccharo azúcar, myces hongo y cerevisiae cerveza) es un hongo unicelular, un tipo de levadura utilizado industrialmente en la fabricación de pan, cerveza y vino.
-
+\newpage
 
 # Especificación del Problema
 
-Se desea desarrollar el árbol filogenético de \textit{Saccharomyces cerevisiae},con respecto a otras levaduras, dadas sus secuencias de ADN, utilizando diferentes algoritmos o métodos para su construcción, basados en caractéres (método de parsimonia), basados en distancias (Neighbor joining, UPGMA, Bayesianos) y máxima verosimilitud (pipeline:SNPhylo).
+La levadura de cerveza *Saccharomyces cerevisiae* (de Saccharo azúcar, myces hongo y cerevisiae cerveza) es un hongo unicelular, un tipo de levadura utilizado industrialmente en la fabricación de pan, cerveza y vino. Se desea desarrollar el árbol filogenético de \textit{Saccharomyces cerevisiae}, con respecto a otras levaduras, dadas sus secuencias de ADN, utilizando diferentes algoritmos o métodos para su construcción, basados en caractéres (método de parsimonia), basados en distancias (Neighbor joining, UPGMA, Bayesianos) y máxima verosimilitud (pipeline:SNPhylo).
 
-Existen varios supuestos que son necesarios probar, el taxa que se desea estimar tiene una relación directa con la precisión esperada. En particular, a menudo las secuencias de ADN son más similares cuando los organismos son relativamente cercanos en términos evolutivos, por lo que la precisión será menor mientras el taxa a clasificar es más específico. 
+Existen varios supuestos que son necesarios probar para determinar su veracidad, el taxa que se desea estimar tiene una relación directa con la precisión esperada. En particular, a menudo las secuencias de ADN son más similares cuando los organismos son relativamente cercanos en términos evolutivos, por lo que la precisión será menor mientras el taxa a clasificar es más específico. 
 
-Por otro lado es importante tener en cuenta que se debe elegir regiones del ADN que vayan acorde a la especifidad del taxa a clasificar. Es decir las cadenas de ADN a menudo son regiones específicas del genoma que son extraídas con base en parámetros de extracción y secuenciación. 
-
-
-En particular la idea principal es comparar los árboles obtenidos utilizando las distintas técnicas y con ello poder identificar las diferencias (si existieran) de los árboles filogenéticos creados.
+Por otro lado es importante tener en cuenta que se debe elegir regiones del ADN que vayan acorde a la especifidad del taxa a clasificar. Es decir las cadenas de ADN a menudo son regiones específicas del genoma que son extraídas con base en parámetros de extracción y secuenciación.  En particular la idea principal es comparar los árboles obtenidos utilizando las distintas técnicas y con ello poder identificar las diferencias (si existieran) de los árboles filogenéticos creados.
 
 En particular de acuerdo con el paper \textit{SNPhylo: a pipeline to construct a phylogenetic tree from huge SNP data}  el cual genera los árboles a través de un pipeline creado para dicho fin también habla que la principal diferencia, analíticamente hablando, con el resto de las técnicas es que utiliza el concepto de LD (\textit{Linkage disequilibrium}) para evitar utilizar mutaciones con patrones que violan los supuestos de independencia y por tanto crean un sesgo en la construcción del árbol, de tal modo que el árbol filogenético *SNPhylo* reduce de cierta forma la redundancia de información. 
 
@@ -63,19 +52,10 @@ En particular de acuerdo con el paper \textit{SNPhylo: a pipeline to construct a
 
 Por tanto se espera corroborar que al menos existan diferencias en la taxonomía de la levadura de cerveza bajo SNPhylo y el resto. En segundo lugar, podremos analizar el tiempo que toma generar el árbol con el pipeline vs. un desarrollo manual en un programa como Python o R. 
 
-El pipeline está hecho para soportar grandes volúmenes de datos aunque para este análisis, deberemos evaluar en términos computacionales el número de secuencias para poder crear los árboles filogenéticos a partir los algoritmos que trabajan con distancias y parsimonia. 
+El pipeline está hecho para soportar grandes volúmenes de datos aunque para este análisis, deberemos evaluar en términos computacionales el número de secuencias para poder crear los árboles filogenéticos a partir los algoritmos que trabajan con distancias y parsimonia. Se explicarán las razones por las que un algoritmo agrupa a la levadura de cerveza de cierta forma a la que lo hacen otros métodos, y finalmente poder decidir cuál es el mejor método para crear el ábol filogenético en este caso. La idea principal es explicar cuáles son las razones, basados en los distintos algoritmos de construcción, por las que existen diferencias entre los árboles.
 
-Las conclusiones esperadas son las razones por las que un algoritmo agrupa a la levadura de cerveza con levaduras distantas a la agrupación quehacen otros métodos, y finalmente poder decidir cuál es el mejor método para crear el ábol filogenético en este caso.
-
-
-
-Con los árboles creados la idea es explicar cuales son las razones,basados en los distintos algoritmos de construcción, por las que existen diferencias entre los árboles.
-Conclusiones.
-
-\end{itemize}
-
-
-# Métodos (Computational Phylogenetics)
+\newpage
+# Métodos: Filogenética Computacional 
 
 El objetivo principal es aplicar algoritmos, métodos computacionales para el análisis filogenético. El objetivo principal es construir un arbol que represente las hipótesis sobre la evolución  de un conjunto de genes, especies o taxones.  
 
@@ -88,10 +68,10 @@ La construcción de los árboles requiere una medida de homología entre las car
 
 \item[\faFlask] \textbf{Método UPGMA}: UPGMA is a generic hierarchical clustering algorithm. It's not specific to reconstructing biological trees, but rather is used for interpreting any type of distance matrix. It is fairly widely used for building phylogenetic trees, though it's application in phylogenetics is usually restricted to building preliminary trees to "guide" the process of multiple sequence alignment. The reason for this is that it's fast, but it makes some assumptions that don't work well for inferring relationships between organisms, which we'll discuss after working through the algorithm. 
 
-\item[\faFlask] \textbf{Método neighbor-joining}:The Neighbour Joining method is a method for re-constructing phylogenetic trees, and computing the lengths of the branches of this tree. In each stage, the two nearest nodes of the tree  are chosen and defined as neighbours in our tree. This is done
+\item[\faBackward] \textbf{Método Neighbor-Joining}:The Neighbour Joining method is a method for re-constructing phylogenetic trees, and computing the lengths of the branches of this tree. In each stage, the two nearest nodes of the tree  are chosen and defined as neighbours in our tree. This is done
 recursively until all of the nodes are paired together. 
 
-\item[\faFlask] \textbf{Métodos de Parsimonia}: identifying the potential phylogenetic tree that requires the smallest total number (or total cost) of evolutionary events to explain the observed sequence data (NP-Hard)
+\item[\faFireExtinguisher] \textbf{Métodos de Parsimonia}: identifying the potential phylogenetic tree that requires the smallest total number (or total cost) of evolutionary events to explain the observed sequence data (NP-Hard)
 
 \item[\faRecycle] \textbf{Métodos de Máxima Verosimilitud}: standard statistical techniques for inferring probability distributions to assign probabilities to particular possible phylogenetic trees, necessarily requires a substitution model to assess the probability of particular mutations
 
@@ -104,16 +84,27 @@ Todos estos métodos dependen de forma implícita o explícita de un modelo mate
 
 Más en https://en.wikipedia.org/wiki/Computational_phylogenetics
 
+\newpage
 # Data Gathering
 
 \begin{itemize}
 \item Data Gathering: Obtención de archivos .fasta con información de las bases y mutaciones de distintas levaduras incluyendo Saccharomyces cerevisiae.
 \item Hacer el alineamiento múltiple de las secuencias utilizando una función en python o utilizando el software Muscle(el cuál es parte del pipeline *SNPhylo*) e identificaremos gráficamente las posiciones perfectamente conservadas a lo largo de todas las secuencias.
-![](/home/abraham/phylogenetics/paper/align.png) 
+
+\begin{center}
+\includegraphics[width=0.8\textwidth]{align.png}
+\end{center}
+
 \item A partir del archivo alineado generar la matriz de distancias entre secuencias usando distancia de Hamming.
 \item Sobre la matriz de distancias aplicar los algoritmos (NJ,UPGMA, etc…)
 \item utilizamos ETEtoolkit para visualizar el árbol filogenético 
-![](/home/abraham/phylogenetics/paper/arbolp.png) 
+
+\begin{center}
+\includegraphics[width=0.7\textwidth, height=0.5\textwidth]{arbolp.png}
+\end{center}
+
+\end{itemize}
+ 
 Finalmente, haremos elejercicio de la construcción del árbol usando el los pasos del pipeline *SNPhylo* y con esto ya tendremos los distintos árboles a interpretar y comparar.
 
 - BlastP (aaquery/aadb) requires as query a protein
@@ -137,24 +128,19 @@ Un posible byproduct de este estudio consiste en realizar una investigación e i
 \end{center}
 
 
-# Software
+## Software
 
-Idealmente se utilizarán las paqueterías disponibles en R o Python, dependiendo de las necesidades del proyecto, las capacidades de cada lenguaje y las capacidades de sus usuarios. 
+Idealmente se utilizarán las paqueterías disponibles en R o Python, dependiendo de las necesidades del proyecto, las capacidades de cada lenguaje y las capacidades de sus usuarios. En general se combinan a través de todo tipo de pipeline de investigación en los cuáles se especifica de forma programática la interacción y participación dentro de la extracción, limpieza, análisis o modelado. Generalmente son orquestados por scripts ejecutables escritos en Shell, modo que todo puede ser generado a partir de la ejecución de un archivo.
 
-```{r setup, include=FALSE, echo=FALSE}
+```{r, include=FALSE, echo=FALSE, eval=FALSE}
 #Hola
 ```
 
-\newpage
-
-
-\newpage
-
 # Revisión de Literatura
-Phylogenetic_Handbook:A Practical Approach to Phylogenetic
-Analysis and Hypothesis Testing,Second Edition, Philippe Lemey, Cambridge University Press 2009
 
-On process ...\footnote{Extraído de algún curso de posgrado en Sistemática Molecular} 
+- Phylogenetic_Handbook:A Practical Approach to Phylogenetic
+
+- Analysis and Hypothesis Testing, Second Edition, Philippe Lemey, Cambridge University Press 2009
 
 - *Felsenstein, J. 2004. Inferring Phylogenies. Sinauer Associates, Sunderland MA.*
 
